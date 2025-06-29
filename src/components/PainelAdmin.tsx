@@ -190,7 +190,7 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-3xl font-bold mb-2">Painel Administrativo</h2>
-            <p className="text-lg opacity-90">Gerencie seus produtos e monitore sua loja</p>
+            <p className="text-lg opacity-90">Gerencie seus produtos esportivos e monitore sua loja</p>
           </div>
           <button
             onClick={() => setMostrarFormulario(true)}
@@ -271,7 +271,7 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({
                       onChange={(e) => setDadosFormulario({ ...dadosFormulario, nome: e.target.value })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
-                      placeholder="Ex: iPhone 15 Pro Max"
+                      placeholder="Ex: Tênis Nike Air Max 270"
                     />
                   </div>
                   
@@ -302,13 +302,9 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({
                         required
                       >
                         <option value="">Selecione</option>
-                        <option value="Eletrônicos">Eletrônicos</option>
-                        <option value="Moda">Moda</option>
-                        <option value="Casa">Casa</option>
-                        <option value="Esportes">Esportes</option>
-                        <option value="Livros">Livros</option>
-                        <option value="Beleza">Beleza</option>
-                        <option value="Outros">Outros</option>
+                        <option value="Tênis">Tênis</option>
+                        <option value="Camisas de Time">Camisas de Time</option>
+                        <option value="Mochilas">Mochilas</option>
                       </select>
                     </div>
                   </div>
@@ -481,12 +477,12 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({
 
                   {/* Dicas de Otimização */}
                   <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-                    <h4 className="font-semibold text-yellow-800 mb-2">💡 Dicas para melhores resultados:</h4>
+                    <h4 className="font-semibold text-yellow-800 mb-2">💡 Dicas para produtos esportivos:</h4>
                     <ul className="text-sm text-yellow-700 space-y-1">
-                      <li>• Use imagens com boa iluminação e fundo limpo</li>
-                      <li>• Prefira formato quadrado (1:1) para melhor visualização</li>
-                      <li>• Evite imagens muito escuras ou com pouco contraste</li>
-                      <li>• Comprima a imagem antes do upload para melhor performance</li>
+                      <li>• Para tênis: mostre o produto de lado e de frente</li>
+                      <li>• Para camisas: prefira fotos com a camisa vestida ou em manequim</li>
+                      <li>• Para mochilas: mostre os compartimentos e detalhes</li>
+                      <li>• Use fundo branco ou neutro para destacar o produto</li>
                     </ul>
                   </div>
                 </div>
@@ -563,7 +559,7 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({
           <div className="text-center py-12">
             <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h4 className="text-xl font-semibold text-gray-700 mb-2">Nenhum produto cadastrado</h4>
-            <p className="text-gray-500">Adicione seu primeiro produto para começar!</p>
+            <p className="text-gray-500">Adicione seu primeiro produto esportivo para começar!</p>
           </div>
         )}
       </div>
