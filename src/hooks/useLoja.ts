@@ -115,19 +115,11 @@ const produtosIniciais: Produto[] = [
 ];
 
 export const useLoja = () => {
+  // Forçar reset do localStorage para garantir que os novos produtos apareçam
   const [loja, setLoja] = useState<Loja>(() => {
-    const salvo = localStorage.getItem('loja-virtual-br');
-    if (salvo) {
-      const dados = JSON.parse(salvo);
-      return {
-        produtos: dados.produtos || produtosIniciais,
-        carrinho: dados.carrinho || [],
-        visualizacaoAtual: 'loja' as const,
-        endereco: dados.endereco,
-        frete: dados.frete,
-        adminLogado: false
-      };
-    }
+    // Limpar localStorage antigo e usar produtos novos
+    localStorage.removeItem('loja-virtual-br');
+    
     return {
       produtos: produtosIniciais,
       carrinho: [],
