@@ -80,13 +80,15 @@ export const useLoja = () => {
         carrinho: dados.carrinho || [],
         visualizacaoAtual: 'loja' as const,
         endereco: dados.endereco,
-        frete: dados.frete
+        frete: dados.frete,
+        adminLogado: false
       };
     }
     return {
       produtos: produtosIniciais,
       carrinho: [],
-      visualizacaoAtual: 'loja' as const
+      visualizacaoAtual: 'loja' as const,
+      adminLogado: false
     };
   });
 
@@ -179,6 +181,22 @@ export const useLoja = () => {
     setLoja(prev => ({ ...prev, frete }));
   };
 
+  const logarAdmin = (sucesso: boolean) => {
+    setLoja(prev => ({ ...prev, adminLogado: sucesso }));
+  };
+
+  const deslogarAdmin = () => {
+    setLoja(prev => ({ 
+      ...prev, 
+      adminLogado: false,
+      visualizacaoAtual: 'loja'
+    }));
+  };
+
+  const limparCarrinho = () => {
+    setLoja(prev => ({ ...prev, carrinho: [] }));
+  };
+
   const obterTotalCarrinho = () => {
     return loja.carrinho.reduce((total, item) => total + (item.preco * item.quantidade), 0);
   };
@@ -202,6 +220,9 @@ export const useLoja = () => {
     definirVisualizacao,
     definirEndereco,
     definirFrete,
+    logarAdmin,
+    deslogarAdmin,
+    limparCarrinho,
     obterTotalCarrinho,
     obterQuantidadeItensCarrinho,
     obterPesoTotalCarrinho

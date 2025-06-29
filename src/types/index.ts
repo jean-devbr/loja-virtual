@@ -32,10 +32,24 @@ export interface CalculoFrete {
   servico: string;
 }
 
+export interface DadosCliente {
+  nome: string;
+  cpf: string;
+  telefone: string;
+  cep: string;
+  endereco: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+}
+
 export interface Loja {
   produtos: Produto[];
   carrinho: ItemCarrinho[];
   visualizacaoAtual: 'loja' | 'admin' | 'carrinho';
   endereco?: Endereco;
   frete?: CalculoFrete[];
+  adminLogado: boolean;
 }

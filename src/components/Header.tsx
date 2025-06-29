@@ -1,16 +1,20 @@
 import React from 'react';
-import { ShoppingCart, Settings, Home, Package, Store } from 'lucide-react';
+import { ShoppingCart, Settings, Home, Package, Store, LogOut } from 'lucide-react';
 
 interface HeaderProps {
   visualizacaoAtual: 'loja' | 'admin' | 'carrinho';
   onMudarVisualizacao: (visualizacao: 'loja' | 'admin' | 'carrinho') => void;
   quantidadeItensCarrinho: number;
+  adminLogado: boolean;
+  onDeslogarAdmin: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   visualizacaoAtual,
   onMudarVisualizacao,
-  quantidadeItensCarrinho
+  quantidadeItensCarrinho,
+  adminLogado,
+  onDeslogarAdmin
 }) => {
   return (
     <header className="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-40">
@@ -64,6 +68,17 @@ export const Header: React.FC<HeaderProps> = ({
               <Settings className="w-4 h-4 mr-2" />
               <span className="hidden sm:inline font-medium">Admin</span>
             </button>
+
+            {adminLogado && (
+              <button
+                onClick={onDeslogarAdmin}
+                className="flex items-center px-4 py-2 rounded-lg transition-all duration-200 text-red-600 hover:text-red-700 hover:bg-red-50"
+                title="Sair do Admin"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline font-medium">Sair</span>
+              </button>
+            )}
           </nav>
         </div>
       </div>
