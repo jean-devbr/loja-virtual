@@ -146,7 +146,8 @@ export const Carrinho: React.FC<CarrinhoProps> = ({
       `🚚 Prazo de entrega: ${freteEscolhido?.prazo || 'A calcular'}\n\n` +
       `✅ *Pagamento confirmado via PIX*`;
     
-    window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(mensagem)}`, '_blank');
+    // Número do WhatsApp atualizado
+    window.open(`https://wa.me/5521989365166?text=${encodeURIComponent(mensagem)}`, '_blank');
     
     // Limpar carrinho após finalizar pedido
     onLimparCarrinho();

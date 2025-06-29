@@ -4,7 +4,7 @@ import { MessageCircle } from 'lucide-react';
 export const BotaoWhatsApp: React.FC = () => {
   const handleWhatsAppClick = () => {
     const mensagem = "Olá! 👋 Gostaria de saber mais sobre os produtos da MegaStore. Podem me ajudar?";
-    const numeroTelefone = "5511999999999"; // Substitua pelo seu número real do WhatsApp
+    const numeroTelefone = "5521989365166"; // Número atualizado
     window.open(`https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`, '_blank');
   };
 
