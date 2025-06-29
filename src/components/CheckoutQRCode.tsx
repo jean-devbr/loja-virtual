@@ -102,7 +102,7 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
     // Simula geração do QR Code
     setTimeout(() => {
       setQrCodeGerado(true);
-    }, 1000);
+    }, 1500);
   };
 
   const simularPagamento = () => {
@@ -128,7 +128,7 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-2xl font-bold">Finalizar Compra</h2>
-              <p className="opacity-90">Preencha seus dados para continuar</p>
+              <p className="opacity-90">Complete seu pedido em 3 etapas simples</p>
             </div>
             <button
               onClick={onFechar}
@@ -141,26 +141,26 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
           {/* Progress Bar */}
           <div className="flex items-center mt-6 space-x-4">
             <div className={`flex items-center ${etapaAtual === 'dados' ? 'text-white' : 'text-white/60'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${etapaAtual === 'dados' ? 'bg-white text-green-600' : 'bg-white/20'}`}>
-                1
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${etapaAtual === 'dados' ? 'bg-white text-green-600' : etapaAtual !== 'dados' ? 'bg-white text-green-600' : 'bg-white/20'}`}>
+                {etapaAtual !== 'dados' ? <Check className="w-5 h-5" /> : '1'}
               </div>
               <span className="ml-2 font-medium">Dados</span>
             </div>
             <div className="flex-1 h-1 bg-white/20 rounded">
-              <div className={`h-full bg-white rounded transition-all duration-300 ${etapaAtual !== 'dados' ? 'w-full' : 'w-0'}`}></div>
+              <div className={`h-full bg-white rounded transition-all duration-500 ${etapaAtual !== 'dados' ? 'w-full' : 'w-0'}`}></div>
             </div>
             <div className={`flex items-center ${etapaAtual === 'pagamento' ? 'text-white' : 'text-white/60'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${etapaAtual === 'pagamento' ? 'bg-white text-green-600' : 'bg-white/20'}`}>
-                2
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${etapaAtual === 'pagamento' ? 'bg-white text-green-600' : etapaAtual === 'confirmacao' ? 'bg-white text-green-600' : 'bg-white/20'}`}>
+                {etapaAtual === 'confirmacao' ? <Check className="w-5 h-5" /> : '2'}
               </div>
               <span className="ml-2 font-medium">Pagamento</span>
             </div>
             <div className="flex-1 h-1 bg-white/20 rounded">
-              <div className={`h-full bg-white rounded transition-all duration-300 ${etapaAtual === 'confirmacao' ? 'w-full' : 'w-0'}`}></div>
+              <div className={`h-full bg-white rounded transition-all duration-500 ${etapaAtual === 'confirmacao' ? 'w-full' : 'w-0'}`}></div>
             </div>
             <div className={`flex items-center ${etapaAtual === 'confirmacao' ? 'text-white' : 'text-white/60'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${etapaAtual === 'confirmacao' ? 'bg-white text-green-600' : 'bg-white/20'}`}>
-                3
+                {etapaAtual === 'confirmacao' ? <Check className="w-5 h-5" /> : '3'}
               </div>
               <span className="ml-2 font-medium">Confirmação</span>
             </div>
@@ -331,13 +331,33 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
                     required
                   >
                     <option value="">Selecione</option>
-                    <option value="SP">SP</option>
-                    <option value="RJ">RJ</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
                     <option value="MG">MG</option>
-                    <option value="RS">RS</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
                     <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
                     <option value="SC">SC</option>
-                    {/* Adicione outros estados conforme necessário */}
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
                   </select>
                 </div>
               </div>
@@ -345,9 +365,9 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
               <div className="flex justify-end pt-6">
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors font-semibold"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
-                  Continuar para Pagamento
+                  Continuar para Pagamento →
                 </button>
               </div>
             </form>
@@ -356,44 +376,84 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
           {/* Etapa 2: Pagamento via QR Code */}
           {etapaAtual === 'pagamento' && (
             <div className="text-center space-y-6">
-              <div className="bg-gray-50 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Pagamento via PIX</h3>
+              <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8">
+                <h3 className="text-3xl font-bold text-gray-900 mb-2">💳 Pagamento via PIX</h3>
+                <p className="text-gray-600 mb-6">Escaneie o código QR com o app do seu banco</p>
                 
                 {!qrCodeGerado ? (
                   <div className="space-y-4">
                     <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p className="text-gray-600">Gerando código PIX...</p>
+                    <p className="text-gray-600">Gerando código PIX seguro...</p>
                   </div>
                 ) : (
                   <div className="space-y-6">
-                    {/* QR Code simulado */}
-                    <div className="bg-white p-8 rounded-2xl shadow-lg inline-block">
-                      <div className="w-64 h-64 bg-gray-900 rounded-lg flex items-center justify-center">
-                        <QrCode className="w-32 h-32 text-white" />
+                    {/* QR Code simulado com design mais realista */}
+                    <div className="bg-white p-6 rounded-2xl shadow-xl inline-block border-2 border-gray-100">
+                      <div className="w-72 h-72 bg-white rounded-lg flex items-center justify-center relative overflow-hidden">
+                        {/* Simulação de QR Code mais realista */}
+                        <div className="absolute inset-0 grid grid-cols-12 gap-1 p-2">
+                          {Array.from({ length: 144 }, (_, i) => (
+                            <div
+                              key={i}
+                              className={`aspect-square ${
+                                Math.random() > 0.5 ? 'bg-black' : 'bg-white'
+                              } ${
+                                // Cantos do QR Code
+                                (i < 21 && (i % 12 < 3 || i % 12 > 8)) ||
+                                (i > 123 && (i % 12 < 3 || i % 12 > 8)) ||
+                                (i % 12 < 3 && i < 36) ||
+                                (i % 12 > 8 && i < 36)
+                                  ? 'bg-black'
+                                  : ''
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        {/* Ícone PIX no centro */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="bg-white p-2 rounded-lg shadow-lg">
+                            <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
+                              <span className="text-white font-bold text-xs">PIX</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
                     <div className="space-y-4">
-                      <p className="text-lg font-semibold text-gray-900">
-                        Escaneie o QR Code com seu app do banco
-                      </p>
-                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                        <p className="text-blue-800 font-semibold">
-                          Valor: {formatarPreco(totalComFrete)}
-                        </p>
+                      <div className="bg-white border-2 border-green-200 rounded-xl p-6">
+                        <div className="flex items-center justify-center gap-3 mb-3">
+                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <CreditCard className="w-4 h-4 text-green-600" />
+                          </div>
+                          <p className="text-xl font-bold text-gray-900">
+                            {formatarPreco(totalComFrete)}
+                          </p>
+                        </div>
                         {frete && (
-                          <p className="text-sm text-blue-600">
-                            Inclui frete: {formatarPreco(frete.valor)}
+                          <p className="text-sm text-gray-600">
+                            Subtotal: {formatarPreco(total)} + Frete: {formatarPreco(frete.valor)}
                           </p>
                         )}
                       </div>
                       
+                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                        <p className="text-blue-800 text-sm">
+                          ⏱️ <strong>Código válido por 15 minutos</strong><br />
+                          🔒 Pagamento 100% seguro via PIX
+                        </p>
+                      </div>
+                      
                       <button
                         onClick={simularPagamento}
-                        className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 transition-colors font-semibold"
+                        className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-200 font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                       >
-                        Simular Pagamento (Demo)
+                        ✅ Simular Pagamento (Demo)
                       </button>
+                      
+                      <p className="text-xs text-gray-500">
+                        * Em produção, o pagamento seria processado automaticamente
+                      </p>
                     </div>
                   </div>
                 )}
@@ -404,44 +464,52 @@ export const CheckoutQRCode: React.FC<CheckoutQRCodeProps> = ({
           {/* Etapa 3: Confirmação */}
           {etapaAtual === 'confirmacao' && (
             <div className="text-center space-y-6">
-              <div className="bg-green-50 rounded-2xl p-8">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Check className="w-10 h-10 text-green-600" />
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8">
+                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                  <Check className="w-12 h-12 text-green-600" />
                 </div>
                 
-                <h3 className="text-2xl font-bold text-green-800 mb-4">
-                  Pagamento Confirmado!
+                <h3 className="text-3xl font-bold text-green-800 mb-4">
+                  🎉 Pagamento Confirmado!
                 </h3>
                 
-                <p className="text-green-700 text-lg mb-6">
+                <p className="text-green-700 text-xl mb-6">
                   Seu pedido foi processado com sucesso
                 </p>
                 
-                <div className="bg-white rounded-xl p-6 text-left">
-                  <h4 className="font-bold text-gray-900 mb-4">Resumo do Pedido:</h4>
-                  <div className="space-y-2 text-sm">
+                <div className="bg-white rounded-xl p-6 text-left shadow-lg">
+                  <h4 className="font-bold text-gray-900 mb-4 text-center">📋 Resumo do Pedido</h4>
+                  <div className="space-y-3 text-sm">
                     {itens.map(item => (
-                      <div key={item.id} className="flex justify-between">
-                        <span>{item.nome} x{item.quantidade}</span>
-                        <span>{formatarPreco(item.preco * item.quantidade)}</span>
+                      <div key={item.id} className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <div>
+                          <span className="font-medium">{item.nome}</span>
+                          <span className="text-gray-500 ml-2">x{item.quantidade}</span>
+                        </div>
+                        <span className="font-semibold">{formatarPreco(item.preco * item.quantidade)}</span>
                       </div>
                     ))}
                     {frete && (
-                      <div className="flex justify-between text-gray-600">
-                        <span>Frete ({frete.servico})</span>
+                      <div className="flex justify-between text-gray-600 py-2 border-b border-gray-100">
+                        <span>🚚 Frete ({frete.servico})</span>
                         <span>{formatarPreco(frete.valor)}</span>
                       </div>
                     )}
-                    <div className="border-t pt-2 flex justify-between font-bold">
-                      <span>Total</span>
+                    <div className="border-t-2 border-green-200 pt-3 flex justify-between text-lg font-bold text-green-800">
+                      <span>💰 Total Pago</span>
                       <span>{formatarPreco(totalComFrete)}</span>
                     </div>
                   </div>
                 </div>
                 
-                <p className="text-gray-600 mt-4">
-                  Você receberá um WhatsApp com os detalhes do pedido
-                </p>
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-6">
+                  <p className="text-blue-800 font-medium">
+                    📱 Você receberá um WhatsApp com todos os detalhes do pedido
+                  </p>
+                  <p className="text-blue-600 text-sm mt-1">
+                    Acompanhe o status da entrega pelo nosso WhatsApp
+                  </p>
+                </div>
               </div>
             </div>
           )}
