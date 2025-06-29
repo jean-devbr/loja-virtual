@@ -219,7 +219,7 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 
 **Jean Costa**
 - GitHub: [@jean-costa](https://github.com/jean-costa)
-- LinkedIn: [Jean Costa](https://linkedin.com/in/jean-costa)
+
 
 ## 🙏 Agradecimentos
 
