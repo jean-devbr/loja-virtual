@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Produto, ItemCarrinho, Loja, Endereco, CalculoFrete } from '../types';
+import { Produto, ItemCarrinho, Loja, Endereco, CalculoFrete, ConfiguracaoLoja } from '../types';
 
 const produtosIniciais: Produto[] = [
   {
@@ -114,17 +114,85 @@ const produtosIniciais: Produto[] = [
   }
 ];
 
+const configuracaoInicial: ConfiguracaoLoja = {
+  id: '1',
+  nomeLoja: 'MegaStore',
+  descricaoLoja: 'Sua loja de esportes favorita! Oferecemos os melhores produtos esportivos com qualidade premium e preços imbatíveis para todo o Brasil.',
+  endereco: {
+    rua: 'Rua das Laranjeiras',
+    numero: '123',
+    bairro: 'Laranjeiras',
+    cidade: 'Rio de Janeiro',
+    uf: 'RJ',
+    cep: '22240-000'
+  },
+  contato: {
+    whatsapp: '5521989365166',
+    email: 'contato@megastore.com.br',
+    telefone: '(21) 3234-5678'
+  },
+  horarioFuncionamento: {
+    segunda: '9h às 18h',
+    terca: '9h às 18h',
+    quarta: '9h às 18h',
+    quinta: '9h às 18h',
+    sexta: '9h às 18h',
+    sabado: '9h às 17h',
+    domingo: '10h às 16h'
+  },
+  redesSociais: {
+    instagram: 'https://instagram.com/megastore',
+    facebook: 'https://facebook.com/megastore',
+    twitter: 'https://twitter.com/megastore',
+    youtube: 'https://youtube.com/megastore'
+  },
+  informacoesLegais: {
+    cnpj: '12.345.678/0001-90',
+    razaoSocial: 'MegaStore Esportes Ltda',
+    inscricaoEstadual: '123.456.789'
+  },
+  beneficios: {
+    freteGratis: {
+      ativo: true,
+      valorMinimo: 299
+    },
+    garantia: {
+      ativo: true,
+      texto: 'Garantia oficial'
+    },
+    pagamentoPix: {
+      ativo: true,
+      desconto: 5
+    },
+    produtosOriginais: {
+      ativo: true,
+      texto: 'Produtos 100% originais'
+    }
+  }
+};
+
 export const useLoja = () => {
-  // Forçar reset do localStorage para garantir que os novos produtos apareçam
   const [loja, setLoja] = useState<Loja>(() => {
-    // Limpar localStorage antigo e usar produtos novos
-    localStorage.removeItem('loja-virtual-br');
+    const saved = localStorage.getItem('loja-virtual-br');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return {
+        produtos: parsed.produtos || produtosIniciais,
+        carrinho: parsed.carrinho || [],
+        visualizacaoAtual: 'loja' as const,
+        adminLogado: false,
+        configuracao: parsed.configuracao || configuracaoInicial,
+        endereco: parsed.endereco,
+        frete: parsed.frete
+      };
+    }
     
     return {
       produtos: produtosIniciais,
       carrinho: [],
       visualizacaoAtual: 'loja' as const,
-      adminLogado: false
+      adminLogado: false,
+      configuracao: configuracaoInicial
     };
   });
 
@@ -133,9 +201,10 @@ export const useLoja = () => {
       produtos: loja.produtos,
       carrinho: loja.carrinho,
       endereco: loja.endereco,
-      frete: loja.frete
+      frete: loja.frete,
+      configuracao: loja.configuracao
     }));
-  }, [loja.produtos, loja.carrinho, loja.endereco, loja.frete]);
+  }, [loja.produtos, loja.carrinho, loja.endereco, loja.frete, loja.configuracao]);
 
   const adicionarProduto = (produto: Omit<Produto, 'id'>) => {
     const novoProduto: Produto = {
@@ -162,6 +231,13 @@ export const useLoja = () => {
       ...prev,
       produtos: prev.produtos.filter(p => p.id !== id),
       carrinho: prev.carrinho.filter(item => item.id !== id)
+    }));
+  };
+
+  const atualizarConfiguracao = (novaConfiguracao: Partial<ConfiguracaoLoja>) => {
+    setLoja(prev => ({
+      ...prev,
+      configuracao: { ...prev.configuracao, ...novaConfiguracao }
     }));
   };
 
@@ -250,6 +326,7 @@ export const useLoja = () => {
     adicionarProduto,
     atualizarProduto,
     excluirProduto,
+    atualizarConfiguracao,
     adicionarAoCarrinho,
     removerDoCarrinho,
     atualizarQuantidadeCarrinho,

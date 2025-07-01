@@ -15,17 +15,27 @@ import {
   Award,
   Heart
 } from 'lucide-react';
+import { ConfiguracaoLoja } from '../types';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  configuracao: ConfiguracaoLoja;
+}
+
+export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
   const handleWhatsAppClick = () => {
-    const mensagem = "Olá! 👋 Vim através do site da MegaStore e gostaria de mais informações.";
-    const numeroTelefone = "5521989365166";
-    window.open(`https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`, '_blank');
+    const mensagem = `Olá! 👋 Vim através do site da ${configuracao.nomeLoja} e gostaria de mais informações.`;
+    window.open(`https://wa.me/${configuracao.contato.whatsapp}?text=${encodeURIComponent(mensagem)}`, '_blank');
   };
 
-  const handleSocialClick = (rede: string) => {
-    // Em produção, estes seriam os links reais das redes sociais
-    console.log(`Redirecionando para ${rede}`);
+  const handleSocialClick = (url: string) => {
+    if (url && url !== '#') {
+      window.open(url, '_blank');
+    }
+  };
+
+  const formatarHorario = () => {
+    const horarios = configuracao.horarioFuncionamento;
+    return `Seg a Sex: ${horarios.segunda}\nSáb: ${horarios.sabado} | Dom: ${horarios.domingo}`;
   };
 
   return (
@@ -41,13 +51,12 @@ export const Footer: React.FC = () => {
                 <Store className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-                MegaStore
+                {configuracao.nomeLoja}
               </h3>
             </div>
             
             <p className="text-gray-300 leading-relaxed">
-              Sua loja de esportes favorita! Oferecemos os melhores produtos esportivos 
-              com qualidade premium e preços imbatíveis para todo o Brasil.
+              {configuracao.descricaoLoja}
             </p>
 
             {/* Localização */}
@@ -57,9 +66,9 @@ export const Footer: React.FC = () => {
                 <div>
                   <p className="font-semibold text-white">Nossa Loja Física</p>
                   <p className="text-gray-300 text-sm">
-                    Rua das Laranjeiras, 123<br />
-                    Laranjeiras - Rio de Janeiro/RJ<br />
-                    CEP: 22240-000
+                    {configuracao.endereco.rua}, {configuracao.endereco.numero}<br />
+                    {configuracao.endereco.bairro} - {configuracao.endereco.cidade}/{configuracao.endereco.uf}<br />
+                    CEP: {configuracao.endereco.cep}
                   </p>
                 </div>
               </div>
@@ -68,9 +77,8 @@ export const Footer: React.FC = () => {
                 <Clock className="w-5 h-5 text-red-400" />
                 <div>
                   <p className="font-semibold text-white">Horário de Funcionamento</p>
-                  <p className="text-gray-300 text-sm">
-                    Seg a Sex: 9h às 18h<br />
-                    Sáb: 9h às 17h | Dom: 10h às 16h
+                  <p className="text-gray-300 text-sm whitespace-pre-line">
+                    {formatarHorario()}
                   </p>
                 </div>
               </div>
@@ -93,7 +101,7 @@ export const Footer: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-semibold">WhatsApp</p>
-                  <p className="text-sm">(21) 98936-5166</p>
+                  <p className="text-sm">{configuracao.contato.whatsapp.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, '($2) $3-$4')}</p>
                 </div>
               </button>
 
@@ -103,7 +111,7 @@ export const Footer: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-semibold">E-mail</p>
-                  <p className="text-sm">contato@megastore.com.br</p>
+                  <p className="text-sm">{configuracao.contato.email}</p>
                 </div>
               </div>
 
@@ -113,7 +121,7 @@ export const Footer: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-semibold">Telefone Fixo</p>
-                  <p className="text-sm">(21) 3234-5678</p>
+                  <p className="text-sm">{configuracao.contato.telefone}</p>
                 </div>
               </div>
             </div>
@@ -155,7 +163,7 @@ export const Footer: React.FC = () => {
             
             <div className="grid grid-cols-2 gap-3">
               <button
-                onClick={() => handleSocialClick('Instagram')}
+                onClick={() => handleSocialClick(configuracao.redesSociais.instagram)}
                 className="bg-gradient-to-r from-pink-600 to-purple-600 p-3 rounded-xl hover:from-pink-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold"
               >
                 <Instagram className="w-4 h-4" />
@@ -163,7 +171,7 @@ export const Footer: React.FC = () => {
               </button>
               
               <button
-                onClick={() => handleSocialClick('Facebook')}
+                onClick={() => handleSocialClick(configuracao.redesSociais.facebook)}
                 className="bg-blue-600 p-3 rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
               >
                 <Facebook className="w-4 h-4" />
@@ -171,7 +179,7 @@ export const Footer: React.FC = () => {
               </button>
               
               <button
-                onClick={() => handleSocialClick('Twitter')}
+                onClick={() => handleSocialClick(configuracao.redesSociais.twitter)}
                 className="bg-sky-500 p-3 rounded-xl hover:bg-sky-600 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
               >
                 <Twitter className="w-4 h-4" />
@@ -179,7 +187,7 @@ export const Footer: React.FC = () => {
               </button>
               
               <button
-                onClick={() => handleSocialClick('YouTube')}
+                onClick={() => handleSocialClick(configuracao.redesSociais.youtube)}
                 className="bg-red-600 p-3 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
               >
                 <Youtube className="w-4 h-4" />
@@ -209,15 +217,17 @@ export const Footer: React.FC = () => {
       <div className="border-t border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="bg-green-600 p-3 rounded-xl">
-                <Truck className="w-6 h-6" />
+            {configuracao.beneficios.freteGratis.ativo && (
+              <div className="flex items-center gap-3 text-center md:text-left">
+                <div className="bg-green-600 p-3 rounded-xl">
+                  <Truck className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Frete Grátis</p>
+                  <p className="text-gray-400 text-sm">Acima de R$ {configuracao.beneficios.freteGratis.valorMinimo}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-white">Frete Grátis</p>
-                <p className="text-gray-400 text-sm">Acima de R$ 299</p>
-              </div>
-            </div>
+            )}
 
             <div className="flex items-center gap-3 text-center md:text-left">
               <div className="bg-blue-600 p-3 rounded-xl">
@@ -229,25 +239,29 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="bg-purple-600 p-3 rounded-xl">
-                <CreditCard className="w-6 h-6" />
+            {configuracao.beneficios.pagamentoPix.ativo && (
+              <div className="flex items-center gap-3 text-center md:text-left">
+                <div className="bg-purple-600 p-3 rounded-xl">
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Pagamento PIX</p>
+                  <p className="text-gray-400 text-sm">{configuracao.beneficios.pagamentoPix.desconto}% desconto à vista</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-white">Pagamento PIX</p>
-                <p className="text-gray-400 text-sm">Desconto à vista</p>
-              </div>
-            </div>
+            )}
 
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="bg-red-600 p-3 rounded-xl">
-                <Award className="w-6 h-6" />
+            {configuracao.beneficios.produtosOriginais.ativo && (
+              <div className="flex items-center gap-3 text-center md:text-left">
+                <div className="bg-red-600 p-3 rounded-xl">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Produtos Originais</p>
+                  <p className="text-gray-400 text-sm">{configuracao.beneficios.garantia.texto}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-white">Produtos Originais</p>
-                <p className="text-gray-400 text-sm">Garantia oficial</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -273,17 +287,17 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-center md:text-left">
               <p className="text-gray-400 text-sm">
-                © 2025 MegaStore - Todos os direitos reservados
+                © 2025 {configuracao.nomeLoja} - Todos os direitos reservados
               </p>
               <p className="text-gray-500 text-xs mt-1">
-                CNPJ: 12.345.678/0001-90 | Rio de Janeiro - RJ
+                CNPJ: {configuracao.informacoesLegais.cnpj} | {configuracao.endereco.cidade} - {configuracao.endereco.uf}
               </p>
             </div>
             
             <div className="flex items-center gap-2 text-gray-400 text-sm">
               <span>Feito com</span>
               <Heart className="w-4 h-4 text-red-500 animate-pulse" />
-              <span>no Rio de Janeiro</span>
+              <span>no {configuracao.endereco.cidade}</span>
             </div>
           </div>
         </div>

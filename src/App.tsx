@@ -18,9 +18,11 @@ function App() {
     endereco,
     frete,
     adminLogado,
+    configuracao,
     adicionarProduto,
     atualizarProduto,
     excluirProduto,
+    atualizarConfiguracao,
     adicionarAoCarrinho,
     removerDoCarrinho,
     atualizarQuantidadeCarrinho,
@@ -61,9 +63,11 @@ function App() {
         return adminLogado ? (
           <PainelAdmin
             produtos={produtos}
+            configuracao={configuracao}
             onAdicionarProduto={adicionarProduto}
             onAtualizarProduto={atualizarProduto}
             onExcluirProduto={excluirProduto}
+            onAtualizarConfiguracao={atualizarConfiguracao}
           />
         ) : (
           <div className="text-center py-16">
@@ -105,7 +109,7 @@ function App() {
         {renderizarVisualizacaoAtual()}
       </main>
       
-      <Footer />
+      <Footer configuracao={configuracao} />
       
       <BotaoWhatsApp />
       

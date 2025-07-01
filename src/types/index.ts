@@ -45,6 +45,63 @@ export interface DadosCliente {
   uf: string;
 }
 
+export interface ConfiguracaoLoja {
+  id: string;
+  nomeLoja: string;
+  descricaoLoja: string;
+  endereco: {
+    rua: string;
+    numero: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+    cep: string;
+  };
+  contato: {
+    whatsapp: string;
+    email: string;
+    telefone: string;
+  };
+  horarioFuncionamento: {
+    segunda: string;
+    terca: string;
+    quarta: string;
+    quinta: string;
+    sexta: string;
+    sabado: string;
+    domingo: string;
+  };
+  redesSociais: {
+    instagram: string;
+    facebook: string;
+    twitter: string;
+    youtube: string;
+  };
+  informacoesLegais: {
+    cnpj: string;
+    razaoSocial: string;
+    inscricaoEstadual: string;
+  };
+  beneficios: {
+    freteGratis: {
+      ativo: boolean;
+      valorMinimo: number;
+    };
+    garantia: {
+      ativo: boolean;
+      texto: string;
+    };
+    pagamentoPix: {
+      ativo: boolean;
+      desconto: number;
+    };
+    produtosOriginais: {
+      ativo: boolean;
+      texto: string;
+    };
+  };
+}
+
 export interface Loja {
   produtos: Produto[];
   carrinho: ItemCarrinho[];
@@ -52,4 +109,5 @@ export interface Loja {
   endereco?: Endereco;
   frete?: CalculoFrete[];
   adminLogado: boolean;
+  configuracao: ConfiguracaoLoja;
 }
