@@ -19,10 +19,9 @@ import { ConfiguracaoLoja } from '../types';
 
 interface FooterProps {
   configuracao: ConfiguracaoLoja;
-  onNavigateTo?: (page: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ configuracao, onNavigateTo }) => {
+export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
   const handleWhatsAppClick = () => {
     const mensagem = `Olá! 👋 Vim através do site da ${configuracao.nomeLoja} e gostaria de mais informações.`;
     window.open(`https://wa.me/${configuracao.contato.whatsapp}?text=${encodeURIComponent(mensagem)}`, '_blank');
@@ -31,12 +30,6 @@ export const Footer: React.FC<FooterProps> = ({ configuracao, onNavigateTo }) =>
   const handleSocialClick = (url: string) => {
     if (url && url !== '#') {
       window.open(url, '_blank');
-    }
-  };
-
-  const handleLinkClick = (page: string) => {
-    if (onNavigateTo) {
-      onNavigateTo(page);
     }
   };
 
@@ -174,42 +167,54 @@ export const Footer: React.FC<FooterProps> = ({ configuracao, onNavigateTo }) =>
             </h3>
             
             <div className="space-y-3">
-              <button 
-                onClick={() => handleLinkClick('politica-privacidade')}
-                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              <a 
+                href="/politica-privacidade.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-300 hover:text-red-400 transition-colors"
               >
                 📋 Política de Privacidade
-              </button>
-              <button 
-                onClick={() => handleLinkClick('termos-uso')}
-                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              </a>
+              <a 
+                href="/termos-uso.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-300 hover:text-red-400 transition-colors"
               >
                 📄 Termos de Uso
-              </button>
-              <button 
-                onClick={() => handleLinkClick('trocas-devolucoes')}
-                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              </a>
+              <a 
+                href="/trocas-devolucoes.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-300 hover:text-red-400 transition-colors"
               >
                 🔄 Trocas e Devoluções
-              </button>
-              <button 
-                onClick={() => handleLinkClick('rastrear-pedido')}
-                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              </a>
+              <a 
+                href="/rastrear-pedido.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-300 hover:text-red-400 transition-colors"
               >
                 📦 Rastrear Pedido
-              </button>
-              <button 
-                onClick={() => handleLinkClick('perguntas-frequentes')}
-                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              </a>
+              <a 
+                href="/perguntas-frequentes.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-300 hover:text-red-400 transition-colors"
               >
                 ❓ Perguntas Frequentes
-              </button>
-              <button 
-                onClick={() => handleLinkClick('sobre-nos')}
-                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              </a>
+              <a 
+                href="/sobre-nos.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-300 hover:text-red-400 transition-colors"
               >
                 🏢 Sobre Nós
-              </button>
+              </a>
             </div>
           </div>
 
