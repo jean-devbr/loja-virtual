@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trocas e Devoluções - MegaStore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-lg border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="/" class="flex items-center">
+                            <div class="w-8 h-8 bg-blue-600 rounded mr-3 flex items-center justify-center">
+                                <span class="text-white font-bold">M</span>
+                            </div>
+                            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                MegaStore
+                            </h1>
+                        </a>
+                    </div>
+                    <a href="/" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        ← Voltar para a Loja
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-2xl p-8 mb-8">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-white/20 p-3 rounded-xl">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">Trocas e Devoluções</h1>
+                        <p class="text-lg opacity-90">Política atualizada em Janeiro de 2025</p>
+                    </div>
+                </div>
+                <p class="text-xl opacity-95">
+                    Sua satisfação é garantida! Conheça nossos prazos e condições.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 space-y-8">
+                
+                <!-- Prazos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="text-xl font-bold text-green-800">Prazo para Troca</h3>
+                        </div>
+                        <p class="text-green-700 text-lg font-semibold">30 dias corridos</p>
+                        <p class="text-green-600 text-sm">A partir do recebimento do produto</p>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <h3 class="text-xl font-bold text-blue-800">Prazo para Devolução</h3>
+                        </div>
+                        <p class="text-blue-700 text-lg font-semibold">7 dias corridos</p>
+                        <p class="text-blue-600 text-sm">Direito de arrependimento (CDC)</p>
+                    </div>
+                </div>
+
+                <!-- Condições para Troca -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-green-100 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Condições para Troca</h2>
+                    </div>
+                    <div class="pl-12 space-y-3 text-gray-700">
+                        <p>✅ Produto em perfeito estado, sem uso</p>
+                        <p>✅ Embalagem original preservada</p>
+                        <p>✅ Etiquetas e lacres intactos</p>
+                        <p>✅ Nota fiscal ou comprovante de compra</p>
+                        <p>✅ Dentro do prazo de 30 dias</p>
+                    </div>
+                </div>
+
+                <!-- Como solicitar -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-blue-100 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Como Solicitar Troca/Devolução</h2>
+                    </div>
+                    <div class="pl-12 space-y-4 text-gray-700">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">📱 Passo 1: Entre em Contato</h4>
+                            <p>WhatsApp: (21) 98936-5166</p>
+                            <p>E-mail: trocas@megastore.com.br</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">📋 Passo 2: Informe os Dados</h4>
+                            <p>• Número do pedido</p>
+                            <p>• Produto que deseja trocar/devolver</p>
+                            <p>• Motivo da solicitação</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">📦 Passo 3: Envio do Produto</h4>
+                            <p>• Embale o produto com cuidado</p>
+                            <p>• Use a etiqueta de postagem que enviaremos</p>
+                            <p>• Poste nos Correios</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">✅ Passo 4: Processamento</h4>
+                            <p>• Análise em até 3 dias úteis</p>
+                            <p>• Troca: novo produto enviado</p>
+                            <p>• Devolução: estorno em até 5 dias úteis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contato -->
+                <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">📞 Precisa de Ajuda?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                        <div>
+                            <p><strong>WhatsApp:</strong> (21) 98936-5166</p>
+                            <p><strong>E-mail:</strong> trocas@megastore.com.br</p>
+                        </div>
+                        <div>
+                            <p><strong>Horário:</strong> Segunda a Sexta, 9h às 18h</p>
+                            <p><strong>Sábado:</strong> 9h às 14h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-8 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-gray-400">© 2025 MegaStore - Todos os direitos reservados</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll to top when page loads
+        window.addEventListener('load', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
