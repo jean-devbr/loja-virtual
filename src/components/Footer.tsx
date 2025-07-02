@@ -19,9 +19,10 @@ import { ConfiguracaoLoja } from '../types';
 
 interface FooterProps {
   configuracao: ConfiguracaoLoja;
+  onNavigateTo?: (page: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
+export const Footer: React.FC<FooterProps> = ({ configuracao, onNavigateTo }) => {
   const handleWhatsAppClick = () => {
     const mensagem = `Olá! 👋 Vim através do site da ${configuracao.nomeLoja} e gostaria de mais informações.`;
     window.open(`https://wa.me/${configuracao.contato.whatsapp}?text=${encodeURIComponent(mensagem)}`, '_blank');
@@ -30,6 +31,12 @@ export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
   const handleSocialClick = (url: string) => {
     if (url && url !== '#') {
       window.open(url, '_blank');
+    }
+  };
+
+  const handleLinkClick = (page: string) => {
+    if (onNavigateTo) {
+      onNavigateTo(page);
     }
   };
 
@@ -167,24 +174,42 @@ export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
             </h3>
             
             <div className="space-y-3">
-              <a href="#" className="block text-gray-300 hover:text-red-400 transition-colors">
+              <button 
+                onClick={() => handleLinkClick('politica-privacidade')}
+                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              >
                 📋 Política de Privacidade
-              </a>
-              <a href="#" className="block text-gray-300 hover:text-red-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleLinkClick('termos-uso')}
+                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              >
                 📄 Termos de Uso
-              </a>
-              <a href="#" className="block text-gray-300 hover:text-red-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleLinkClick('trocas-devolucoes')}
+                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              >
                 🔄 Trocas e Devoluções
-              </a>
-              <a href="#" className="block text-gray-300 hover:text-red-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleLinkClick('rastrear-pedido')}
+                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              >
                 📦 Rastrear Pedido
-              </a>
-              <a href="#" className="block text-gray-300 hover:text-red-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleLinkClick('perguntas-frequentes')}
+                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              >
                 ❓ Perguntas Frequentes
-              </a>
-              <a href="#" className="block text-gray-300 hover:text-red-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleLinkClick('sobre-nos')}
+                className="block text-gray-300 hover:text-red-400 transition-colors text-left"
+              >
                 🏢 Sobre Nós
-              </a>
+              </button>
             </div>
           </div>
 

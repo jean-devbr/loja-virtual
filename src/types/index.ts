@@ -105,7 +105,7 @@ export interface ConfiguracaoLoja {
 export interface Loja {
   produtos: Produto[];
   carrinho: ItemCarrinho[];
-  visualizacaoAtual: 'loja' | 'admin' | 'carrinho';
+  visualizacaoAtual: 'loja' | 'admin' | 'carrinho' | 'politica-privacidade' | 'termos-uso' | 'trocas-devolucoes' | 'rastrear-pedido' | 'perguntas-frequentes' | 'sobre-nos';
   endereco?: Endereco;
   frete?: CalculoFrete[];
   adminLogado: boolean;

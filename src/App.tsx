@@ -6,6 +6,12 @@ import { Carrinho } from './components/Carrinho';
 import { BotaoWhatsApp } from './components/BotaoWhatsApp';
 import { LoginAdmin } from './components/LoginAdmin';
 import { Footer } from './components/Footer';
+import { PoliticaPrivacidade } from './pages/PoliticaPrivacidade';
+import { TermosUso } from './pages/TermosUso';
+import { TrocasDevolucoes } from './pages/TrocasDevolucoes';
+import { RastrearPedido } from './pages/RastrearPedido';
+import { PerguntasFrequentes } from './pages/PerguntasFrequentes';
+import { SobreNos } from './pages/SobreNos';
 import { useLoja } from './hooks/useLoja';
 
 function App() {
@@ -37,7 +43,7 @@ function App() {
     obterPesoTotalCarrinho
   } = useLoja();
 
-  const handleMudarVisualizacao = (visualizacao: 'loja' | 'admin' | 'carrinho') => {
+  const handleMudarVisualizacao = (visualizacao: typeof visualizacaoAtual) => {
     if (visualizacao === 'admin') {
       if (!adminLogado) {
         setMostrarLoginAdmin(true);
@@ -90,6 +96,18 @@ function App() {
             onLimparCarrinho={limparCarrinho}
           />
         );
+      case 'politica-privacidade':
+        return <PoliticaPrivacidade />;
+      case 'termos-uso':
+        return <TermosUso />;
+      case 'trocas-devolucoes':
+        return <TrocasDevolucoes />;
+      case 'rastrear-pedido':
+        return <RastrearPedido />;
+      case 'perguntas-frequentes':
+        return <PerguntasFrequentes />;
+      case 'sobre-nos':
+        return <SobreNos />;
       default:
         return <Loja produtos={produtos} onAdicionarAoCarrinho={adicionarAoCarrinho} />;
     }
@@ -109,7 +127,10 @@ function App() {
         {renderizarVisualizacaoAtual()}
       </main>
       
-      <Footer configuracao={configuracao} />
+      <Footer 
+        configuracao={configuracao} 
+        onNavigateTo={handleMudarVisualizacao}
+      />
       
       <BotaoWhatsApp />
       
