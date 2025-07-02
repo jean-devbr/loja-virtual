@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Loja } from './pages/Loja';
 import { PainelAdmin } from './components/PainelAdmin';
@@ -42,6 +42,11 @@ function App() {
     obterQuantidadeItensCarrinho,
     obterPesoTotalCarrinho
   } = useLoja();
+
+  // Scroll to top when view changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [visualizacaoAtual]);
 
   const handleMudarVisualizacao = (visualizacao: typeof visualizacaoAtual) => {
     if (visualizacao === 'admin') {
