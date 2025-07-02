@@ -38,6 +38,39 @@ export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
     return `Seg a Sex: ${horarios.segunda}\nSáb: ${horarios.sabado} | Dom: ${horarios.domingo}`;
   };
 
+  // Helper function to check if a social media URL is valid
+  const isValidSocialUrl = (url: string) => {
+    return url && url.trim() !== '' && url !== '#';
+  };
+
+  // Get array of valid social media platforms
+  const validSocialPlatforms = [
+    {
+      name: 'Instagram',
+      url: configuracao.redesSociais.instagram,
+      icon: Instagram,
+      bgClass: 'bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700'
+    },
+    {
+      name: 'Facebook',
+      url: configuracao.redesSociais.facebook,
+      icon: Facebook,
+      bgClass: 'bg-blue-600 hover:bg-blue-700'
+    },
+    {
+      name: 'Twitter',
+      url: configuracao.redesSociais.twitter,
+      icon: Twitter,
+      bgClass: 'bg-sky-500 hover:bg-sky-600'
+    },
+    {
+      name: 'YouTube',
+      url: configuracao.redesSociais.youtube,
+      icon: Youtube,
+      bgClass: 'bg-red-600 hover:bg-red-700'
+    }
+  ].filter(platform => isValidSocialUrl(platform.url));
+
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white mt-16">
       {/* Seção Principal */}
@@ -157,43 +190,29 @@ export const Footer: React.FC<FooterProps> = ({ configuracao }) => {
 
           {/* Redes Sociais e Certificações */}
           <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white border-b border-red-600 pb-2">
-              📱 Redes Sociais
-            </h3>
-            
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => handleSocialClick(configuracao.redesSociais.instagram)}
-                className="bg-gradient-to-r from-pink-600 to-purple-600 p-3 rounded-xl hover:from-pink-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold"
-              >
-                <Instagram className="w-4 h-4" />
-                Instagram
-              </button>
-              
-              <button
-                onClick={() => handleSocialClick(configuracao.redesSociais.facebook)}
-                className="bg-blue-600 p-3 rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
-              >
-                <Facebook className="w-4 h-4" />
-                Facebook
-              </button>
-              
-              <button
-                onClick={() => handleSocialClick(configuracao.redesSociais.twitter)}
-                className="bg-sky-500 p-3 rounded-xl hover:bg-sky-600 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
-              >
-                <Twitter className="w-4 h-4" />
-                Twitter
-              </button>
-              
-              <button
-                onClick={() => handleSocialClick(configuracao.redesSociais.youtube)}
-                className="bg-red-600 p-3 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
-              >
-                <Youtube className="w-4 h-4" />
-                YouTube
-              </button>
-            </div>
+            {validSocialPlatforms.length > 0 && (
+              <>
+                <h3 className="text-xl font-bold text-white border-b border-red-600 pb-2">
+                  📱 Redes Sociais
+                </h3>
+                
+                <div className={`grid gap-3 ${validSocialPlatforms.length === 1 ? 'grid-cols-1' : validSocialPlatforms.length === 2 ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                  {validSocialPlatforms.map((platform) => {
+                    const IconComponent = platform.icon;
+                    return (
+                      <button
+                        key={platform.name}
+                        onClick={() => handleSocialClick(platform.url)}
+                        className={`${platform.bgClass} p-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold`}
+                      >
+                        <IconComponent className="w-4 h-4" />
+                        {platform.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
 
             {/* Certificações */}
             <div className="space-y-3">
