@@ -37,7 +37,4 @@ O sistema será baseado em **arquitetura de microserviços**, onde cada módulo 
 - Pagamentos  
 - Gestão de estoque e pedidos  
 
-**Banco de Dados**: combinação de **SQL (transacional)** e **NoSQL (catálogo de produtos e histórico de acessos)**.  
-**Armazenamento**: Azure Blob Storage para imagens de produtos.  
-**Monitoramento**: Azure Monitor e Application Insights.  
-"""
+**Banco de Dados**: PostgreSQL
